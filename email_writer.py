@@ -33,8 +33,8 @@ chat_prompt = """<PROMPT>
         • If it's a new email: generate a fresh, properly structured email.  
         • Keep the tone professional, respectful, and concise.  
         • Output must contain two sections:
-            1) <SUBJECT>  
-            2) <BODY>  
+            1) Subject
+            2) Body 
     </INSTRUCTIONS>
 
     <INPUT_EXAMPLE>
