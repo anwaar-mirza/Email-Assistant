@@ -3,14 +3,10 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 import streamlit as st
 import os
+
 os.environ['GROQ_API_KEY'] = st.secrets['GROQ_API_KEY']
 
-chat_prompt = """
-<System>
-You are an expert email assistant. Follow the XML instructions strictly.
-</System>
-
-<PROMPT>
+chat_prompt = """<PROMPT>
     <ROLE>
         You are an expert email assistant specialized in analyzing scenarios and generating professional emails or replies based on the given input.
     </ROLE>
@@ -67,33 +63,24 @@ You are an expert email assistant. Follow the XML instructions strictly.
     </INPUT>
 </PROMPT>
 """
-
 class EmailAssistant:
-    def __init__(self, prompt_template):
-        llm = ChatGroq(
-            model="llama-3.3-70b-versatile",
-            temperature=0.6,
-            max_tokens=1028
-        )
-        prompt = ChatPromptTemplate.from_template(prompt_template)
+    def __init__(self, prompt_templete):
+        llm = ChatGroq(model="llama-3.3-70b-versatile", temperature=1.5, max_tokens=1028)
+        prompt = ChatPromptTemplate.from_template(prompt_templete)
         parser = StrOutputParser()
         self.chain = prompt | llm | parser
     
     def get_response(self, input_text, from_whom, to):
-        return self.chain.invoke({
-            "from_whom": from_whom,
-            "email_scenerio": input_text,
-            "to": to
-        })
+        return self.chain.invoke({"from_whom": from_whom, "email_scenerio": input_text, "to": to})
+    
 
-# ---------------- STREAMLIT UI ----------------
+
 st.set_page_config(page_title="AI Email Assistant", layout="centered")
-
 st.title("📧 AI Email Generator & Reply Assistant")
 st.write("Enter a scenario below and the AI will generate the correct professional email.")
 
-from_whom = st.text_input("From:")
-to = st.text_input("To:")
+from_whom = st.text_input("From: ") 
+to = st.text_input("To: ")
 
 user_input = st.text_area(
     "✍️ Enter your email scenario:",
