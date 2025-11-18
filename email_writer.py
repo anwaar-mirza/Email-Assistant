@@ -5,7 +5,12 @@ import streamlit as st
 import os
 os.environ['GROQ_API_KEY'] = st.secrets['GROQ_API_KEY']
 
-chat_prompt = """<PROMPT>
+chat_prompt = """
+<System>
+You are an expert email assistant. Follow the XML instructions strictly.
+</System>
+
+<PROMPT>
     <ROLE>
         You are an expert email assistant specialized in analyzing scenarios and generating professional emails or replies based on the given input.
     </ROLE>
@@ -61,7 +66,6 @@ chat_prompt = """<PROMPT>
         To: {to}
     </INPUT>
 </PROMPT>
-
 """
 
 class EmailAssistant:
