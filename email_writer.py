@@ -58,9 +58,9 @@ John
     </EXAMPLE_OUTPUT>
 
     <INPUT>
-        Scenario: {{email_scenerio}}
-        From: {{from_whom}}
-        To: {{to}}
+        Scenario: {email_scenerio}
+        From: {from_whom}
+        To: {to}
     </INPUT>
 </PROMPT>
 """
